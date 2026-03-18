@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main (void){
+	char numero_cartao[100];
+	int digito = 0;
+
+	printf("Digite o numero do cartao: " );
+
+	fgets(numero_cartao, sizeof(numero_cartao), stdin);
+
+	numero_cartao[strcspn(numero_cartao, "\n")] = 0;
+
+	while(numero_cartao[digito] != '\0'){
+		
+		if(isdigit(numero_cartao[digito])){
+			digito++;
+		}
+		else{
+			printf("Por favor digite apenas numeros, tente novamente. \n");
+			printf("Caracter encontrado na posicao: %d", digito + 1); 
+			return 0;
+		}	
+
+	}
+
+	if(digito == 0) printf("O campo nao pode ser vazio, tente novamente.\n");
+
+	if(digito < 15) printf("INVALID.\n");
+
+	if(digito == 15){
+	       printf("AMEX\n");
+	}
+	else if (digito == 16){
+		printf("MASTERCARD\n");
+	}	
+	else if (digito == 13 || digito == 16){
+		printf("VISA\n");
+	}
+
+	int pos = (strcspn(numero_cartao, "54")) ? 1 : 0;
+
+	printf("Teste: %d", pos);
+
+	printf("Digito: %d", digito);
+
+	return 0;
+}
