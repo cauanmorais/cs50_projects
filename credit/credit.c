@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include <stdlib.h>
+#include <stdbool.h>
 
 int main (void){
 	char numero_cartao[40];
@@ -50,34 +50,28 @@ int main (void){
         	tipo = 3;
     	}
 	
-	printf("tipo do cartao %d\n", tipo);
-	
 	//Multiply every other digit by 2, starting with the number’s second-to-last digit
 	// add those products’ digits together.	
+	//Add the sum to the sum of the digits that weren’t multiplied by 2.
 	
-	for(int i = tamanho - 2; i >= 1; i = i - 2){
-		int valor = numero_cartao[i];
-		printf("Index second-to-last: %d.\n", i);
-		if(valor >= 10){
-			valor - 10;
-			total + 10;
-			total += valor;
-		}else{
-			total += valor;
-		}
-	}
+	for(int i = tamanho - 1; i >= 0; i--){
+		bool multiplica = false;
+		int valor = numero_cartao[i] - '0';
 
-	// add those products’ digits together.	
-	
-	for(int i = tamanho - 1; i >= 1; i = i - 2){
-		printf("Index: %d.\n", i);
-		int valor = numero_cartao[i];
-		total += valor;
+		if(multiplica){
+			valor * 2; 
+			if(valor >= 10){
+				valor - 10;
+				total + 10;
+				total += valor;
+			}else{
+				total += valor;
+			}
+		}
+		multiplica != multiplica;
 	}
 	
-	// if the total modulo 10 is congruent to 0), the number is valid!
-		
-	if(total%10 == 0){
+	if(total % 10 == 0){
 		printf("Acertou! \n");
 	}else{
 		printf("Errou, o valor restante foi: %d.\n", total);
