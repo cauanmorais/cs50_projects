@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 int main (void){
-	char numero_cartao[100];
+	char numero_cartao[40];
+	char resultado[30];
 	int digito = 0;
+	int tamanho = 0;
+	int total = 0;
 
 	printf("Digite o numero do cartao: " );
 
@@ -27,28 +31,57 @@ int main (void){
 
 	if(digito == 0) printf("O campo nao pode ser vazio, tente novamente.\n");
 
-	// Valida Cartão 
-	if(digito < 15) printf("INVALID.\n");
-
-	if(digito == 15){
-	       printf("AMEX\n");
-	}
-	else if (digito == 16){
-		printf("MASTERCARD\n");
-	}	
-	else if (digito == 13 || digito == 16){
-		printf("VISA\n");
-	}
-
-	//Transformar em int os digitos
-
-	//Multiply every other digit by 2, starting with the number’s second-to-last digit
+	tamanho = digito;
 	
+	// Valida Cartão 
+	
+	int primeiro = numero_cartao[0] - '0';
+	int segundo = numero_cartao[1] - '0';
+    	int dois_primeiros = primeiro * 10 + segundo;
+
+	int tipo = 0; 
+    	// 0 = INVALID, 1 = AMEX, 2 = MASTERCARD, 3 = VISA
+
+    	if (tamanho == 15 && (dois_primeiros == 34 || dois_primeiros == 37)) {
+        	tipo = 1;
+    	}else if (tamanho == 16 && (dois_primeiros >= 51 && dois_primeiros <= 55)) {
+        	tipo = 2;
+    	}else if ((tamanho == 13 || tamanho == 16) && primeiro == 4) {
+        	tipo = 3;
+    	}
+	
+	printf("tipo do cartao %d\n", tipo);
+	
+	//Multiply every other digit by 2, starting with the number’s second-to-last digit
 	// add those products’ digits together.	
 	
-	// Add the sum to the sum of the digits that weren’t multiplied by 2.
+	for(int i = tamanho - 2; i >= 1; i = i - 2){
+		int valor = numero_cartao[i];
+		printf("Index second-to-last: %d.\n", i);
+		if(valor >= 10){
+			valor - 10;
+			total + 10;
+			total += valor;
+		}else{
+			total += valor;
+		}
+	}
+
+	// add those products’ digits together.	
+	
+	for(int i = tamanho - 1; i >= 1; i = i - 2){
+		printf("Index: %d.\n", i);
+		int valor = numero_cartao[i];
+		total += valor;
+	}
 	
 	// if the total modulo 10 is congruent to 0), the number is valid!
+		
+	if(total%10 == 0){
+		printf("Acertou! \n");
+	}else{
+		printf("Errou, o valor restante foi: %d.\n", total);
+	}
 
-	return 0;
+	return 1;
 }
