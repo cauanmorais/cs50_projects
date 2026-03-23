@@ -50,11 +50,10 @@ int main (void){
         	tipo = 3;
     	}
 	
-	printf("tipo do cartao %d\n", tipo);
-	
 	//Multiply every other digit by 2, starting with the number’s second-to-last digit
 	// add those products’ digits together.	
 	//Add the sum to the sum of the digits that weren’t multiplied by 2.
+	
 	for(int i = tamanho - 1; i >= 0; i--){
 		bool multiplica = false;
 		int valor = numero_cartao[i] - '0';
@@ -72,9 +71,7 @@ int main (void){
 		multiplica != multiplica;
 	}
 	
-	// if the total modulo 10 is congruent to 0), the number is valid!
-		
-	if(total%10 == 0){
+	if(total % 10 == 0){
 		printf("Acertou! \n");
 	}else{
 		printf("Errou, o valor restante foi: %d.\n", total);

@@ -49,6 +49,11 @@ int main (void){
     	}else if ((tamanho == 13 || tamanho == 16) && primeiro == 4) {
         	tipo = 3;
     	}
+
+	if(tipo == 0){
+	       printf("O numero de cartao digitado nao foi reconhecido, tente novamente");	
+	       return 0;
+	}
 	
 	//Multiply every other digit by 2, starting with the number’s second-to-last digit
 	// add those products’ digits together.	
